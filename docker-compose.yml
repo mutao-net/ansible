@@ -1,0 +1,14 @@
+version: '3'
+services:
+  ansible-container:
+    container_name: ansible-container
+    build: docker/ansible-container
+    tty: true
+    working_dir: "/var/data"
+    volumes:
+      - .:/var/data
+  
+  centos7:
+    container_name: centos7
+    build: docker/centos7
+    tty: true

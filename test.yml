@@ -1,0 +1,4 @@
+- hosts: centos7
+  tasks:
+  - name: "test"
+    shell: touch test.txt
