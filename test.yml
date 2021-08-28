@@ -1,4 +1,6 @@
 - hosts: centos7
+  roles:
+    - td-agent
   tasks:
   - name: "test"
     shell: touch test.txt

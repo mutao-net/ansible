@@ -1,0 +1,28 @@
+---
+- name: install td-agent
+  shell: curl -L https://toolbelt.treasuredata.com/sh/install-redhat-td-agent4.sh | sh
+  become: yes
+
+- name: setting root user
+  lineinfile:
+    dest: /usr/lib/systemd/system/td-agent.service
+    backrefs: yes
+    regexp: ^User=
+    line: User=root
+    state: present
+
+- name: setting root group
+  lineinfile:
+    dest: /usr/lib/systemd/system/td-agent.service
+    backrefs: yes
+    regexp: ^Group=
+    line: Group=root
+    state: present
+
+- name: make service
+  systemd:
+    name: td-agent
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
+  become: yes

@@ -8,7 +8,7 @@
 
 3. $ docker exec -it ansible-container /bin/bash
 
-4. ansible-playbook -i hosts test.yml --ask-pass
+4. $ ansible-playbook -i hosts test.yml --ask-pass
 
 input password
 ```

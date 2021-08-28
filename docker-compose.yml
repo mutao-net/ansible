@@ -7,8 +7,12 @@ services:
     working_dir: "/var/data"
     volumes:
       - .:/var/data
+    privileged: true
+    command: /sbin/init
   
   centos7:
     container_name: centos7
     build: docker/centos7
     tty: true
+    privileged: true
+    command: /sbin/init
