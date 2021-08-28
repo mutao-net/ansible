@@ -1,6 +1,7 @@
 - hosts: centos7
   roles:
-    - td-agent
+#    - td-agent
+    - node-exporter
   tasks:
   - name: "test"
     shell: touch test.txt

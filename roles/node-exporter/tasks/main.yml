@@ -1,0 +1,39 @@
+---
+- name: create exporter group
+  group:
+    name: exporter
+
+- name: create user exporter
+  user:
+    name: exporter
+    shell: /bin/bash
+    groups: exporter
+    append: yes
+
+- name: unarchive node_exporter
+  unarchive:
+    src: https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
+    dest: /tmp/
+    owner: exporter
+    group: exporter
+    remote_src: yes
+
+- name: copy node_exporter
+  copy:
+    src: "/tmp/node_exporter-1.2.2.linux-amd64/node_exporter"
+    dest: "/usr/local/bin/"
+    mode: 0655
+    remote_src: yes
+
+- name: copy node_exporter service
+  copy:
+    src: node_exporter.service
+    dest: /usr/lib/systemd/system/node_exporter.service
+
+- name: make service
+  systemd:
+    name: node_exporter
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
+  become: yes
