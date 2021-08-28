@@ -1,5 +1,7 @@
 # ansible
 
+Ansibleの勉強兼ねて便利なtasksとか作って置いとく用。
+
 ## Usage
 ```
 1. $ docker-compose build
