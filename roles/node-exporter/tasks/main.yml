@@ -27,12 +27,12 @@
 
 - name: copy node_exporter service
   copy:
-    src: node_exporter.service
-    dest: /usr/lib/systemd/system/node_exporter.service
+    src: node-exporter.service
+    dest: /usr/lib/systemd/system/node-exporter.service
 
 - name: make service
   systemd:
-    name: node_exporter
+    name: node-exporter
     daemon_reload: yes
     state: restarted
     enabled: yes
