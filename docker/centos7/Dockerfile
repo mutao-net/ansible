@@ -10,7 +10,7 @@ RUN ssh-keygen -t rsa -N "" -f /etc/ssh/ssh_host_rsa_key
 EXPOSE 22
 
 # yum update
-RUN yum -y update && yum -y install epel-release  wget  make sudo glibc
+RUN yum -y update && yum -y install epel-release  wget  make sudo glibc firewalld
 
 
 ## Python install
