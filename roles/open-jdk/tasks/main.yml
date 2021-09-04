@@ -1,0 +1,30 @@
+---
+- name: create jdk dir
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /tmp/work
+    - /usr/open-jdk
+
+- name: yum install jdk11
+  yum:
+    name: java-11-openjdk
+  become: true
+
+#- name: unarchive archive
+#  unarchive:
+#    src: https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz
+#    dest: /usr/open-jdk
+#    creates: /usr/open-jdk/open-jdk11
+#    remote_src: yes
+
+#- name: create symbolic link
+#  alternatives:
+#    name: "{{ item }}"
+#    link: /usr/bin/{{ item }}
+#    path: /usr/bin/openjdk-11
+#  with_items:
+#    - java
+#    - javac
+  

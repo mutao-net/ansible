@@ -1,0 +1,39 @@
+---
+- name: create exporter group
+  group:
+    name: exporter
+  
+- name: create user exporter
+  user:
+    name: exporter
+      shell: /bin/bash
+      groups: exporter
+      append: yes
+  
+- name: unarchive mysqld_exporter
+  unarchive:
+    src: https://github.com/prometheus/mysqld_exporter/releases/download/v0.13.0/mysqld_exporter-0.13.0.linux-amd64.tar.gz
+      dest: /tmp/
+      owner: exporter
+      group: exporter
+      remote_src: yes
+
+ - name: copy meysqld_exporter
+  copy:
+    src: "/tmp/mysqld_exporter-0.13.0.linux-amd64/mysqld_exporter"
+    dest: "/usr/local/bin/"
+    mode: 0655
+    remote_src: yes
+
+- name: copy mysqld_exporter service
+  copy:
+    src: mysqld-exporter.service
+    dest: /usr/lib/systemd/system/mysqld-exporter.service
+  
+- name: make service
+  systemd:
+    name: node-exporter
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
+   become: yes
