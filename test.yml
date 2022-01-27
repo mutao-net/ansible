@@ -1,8 +1,26 @@
 - hosts: centos7
-  roles:
+#  roles:
 #    - td-agent
 #    - node-exporter
-  - nginx
+#  - nginx
+#  - open-jdk
+#  - loop
+ # tasks:
+ #   - name: "test"
+ #     shell: touch test.txt
+
+  vars:
+    users:
+      - name: user1
+        groups:
+          - wheel
+          - hoge
+      - name: user2
+        groups:
+          - hoge
   tasks:
-  - name: "test"
-    shell: touch test.txt
+    - debug:
+        msg: "name={{ item.0.name }}, group={{ item.1 }}"
+      with_subelements:
+        - "{{ users }}"
+        - groups
